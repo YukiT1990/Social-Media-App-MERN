@@ -5,8 +5,12 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Topbar() {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const logoutHandler = () => {
+    dispatch({ type: "LOGOUT" });
+  };
 
   return (
     <div className="topbarContainer">
@@ -26,8 +30,18 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <span className="topbarLink">Homepage</span>
+          </Link>
           <span className="topbarLink">Timeline</span>
+          {user &&
+            <span className="topbarLink" onClick={logoutHandler}>Logout</span>
+          }
+          {!user &&
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              <span className="topbarLink">Login</span>
+            </Link>
+          }
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
@@ -48,7 +62,7 @@ export default function Topbar() {
             src={
               user.profilePicture
                 ? PF + user.profilePicture
-                : PF + "person/noAvatar.png"
+                : PF + "fish/noAvatar.jpg"
             }
             alt=""
             className="topbarImg"
