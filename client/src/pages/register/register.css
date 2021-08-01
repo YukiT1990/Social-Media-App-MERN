@@ -1,0 +1,141 @@
+/* small screen */
+
+.register {
+  width: 100vw;
+  height: 180vh;
+  background-color: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registerWrapper {
+  width: 70%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.registerLeft,
+.registerRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: min(50px, 40/375*100vw);
+}
+
+.registerLogo {
+  font-size: min(50px, 30/375*100vw);
+  font-weight: 800;
+  color: #1775ee;
+  margin-bottom: min(10px, 10/375*100vw);
+}
+
+.registerDesc {
+  font-size: min(24px, 20/375*100vw);
+}
+
+.registerBox{
+    height: min(400px, 400/375*100vw);
+    padding: min(20px, 20/375*100vw);
+    background-color: white;
+    border-radius: min(10px, 10/375*100vw);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.registerInput{
+    height: min(50px, 50/375*100vw);
+    border-radius: min(10px, 10/375*100vw);
+    border: 1px solid gray;
+    font-size: min(18px, 16/375*100vw);
+    padding-left: min(20px, 20/375*100vw);
+}
+
+.registerInput:focus{
+    outline: none;
+}
+
+.registerButton{
+    height: min(50px, 50/375*100vw);
+    border-radius: min(10px, 10/375*100vw);
+    border: none;
+    background-color: #1775ee;
+    color: white;
+    font-size: min(20px, 16/375*100vw);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.registerForgot{
+    text-align: center;
+    color: #1775ee;
+}
+
+.registerLoginButton{
+    width: 60%;
+    align-self: center;
+    height: min(50px, 50/375*100vw);
+    border-radius: min(10px, 10/375*100vw);
+    border: none;
+    background-color: #42b72a;
+    color: white;
+    font-size: min(20px, 16/375*100vw);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+/* wider than 600px */
+@media screen and (min-width: 600px) {
+  .register {
+    height: 100vh;
+  }
+
+  .registerWrapper {
+    flex-direction: row;
+  }
+  
+  .registerLeft,
+  .registerRight  {
+    margin-bottom: 0px;
+  }
+
+  .registerLogo {
+    font-size: 50px;
+    margin-bottom: 10px;
+  }
+
+  .registerDesc {
+    font-size: 24px;
+  }
+
+  .registerBox{
+    height: 400px;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .registerInput{
+    height: 50px;
+    border-radius: 10px;
+    font-size: 18px;
+    padding-left: 20px;
+  }
+
+  .registerButton{
+    height: 50px;
+    border-radius: 10px;
+    font-size: 20px;
+  }
+
+  .registerLoginButton{
+    width: 60%;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 20px;
+  }
+
+}
