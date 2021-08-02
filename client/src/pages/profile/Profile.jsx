@@ -6,6 +6,7 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import { useEffect, useState } from "react";
 import axios from "axios"
 import { useParams } from "react-router"
+import { Edit } from "@material-ui/icons";
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -35,11 +36,13 @@ export default function Profile() {
                 src={user.coverPicture ? PF + user.coverPicture : PF + "fish/noCover.jpg"}
                 alt=""
               />
+              <span className="coverImgEdit"><Edit htmlColor="Black" className="editImg" /></span>
               <img
                 className="profileUserImg"
                 src={user.profilePicture ? PF + user.profilePicture : PF + "fish/noAvatar.jpg"}
                 alt=""
               />
+              <span className="userImgEdit"><Edit htmlColor="Black" className="editImg" /></span>
             </div>
             <div className="profileInfo">
               <h4 className="profileInfoName">{user.username}</h4>

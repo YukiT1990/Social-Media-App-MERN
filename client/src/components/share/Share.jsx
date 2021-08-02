@@ -18,8 +18,9 @@ export default function Share() {
     };
     if (file) {
       const data = new FormData();
-      // const fileName = Date.now() + file.name;
-      const fileName = file.name;
+      const fileName = Date.now() + file.name;
+      // for postman
+      // const fileName = file.name;
       data.append("name", fileName);
       data.append("file", file);
       newPost.img = fileName;

@@ -1,24 +1,24 @@
-.profile{
+.profile {
   display: flex;
   flex-direction: column;
 }
 
-.profileRight{
+.profileRight {
   flex: 9;
 }
 
-.profileCover{
+.profileCover {
   height: 320px;
   position: relative;
 }
 
-.profileCoverImg{
+.profileCoverImg {
   width: 100%;
   height: 250px;
   object-fit: cover;
 }
 
-.profileUserImg{
+.profileUserImg {
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -31,25 +31,24 @@
   border: 3px solid white;
 }
 
-.profileInfo{
+.profileInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.profileInfoName{
+.profileInfoName {
   font-size: 24px;
 }
 
-.profileInfoDesc{
+.profileInfoDesc {
   font-weight: 300;
 }
 
-.profileRightBottom{
+.profileRightBottom {
   display: flex;
 }
-
 
 .sidebarContainerProfile {
   display: none;
@@ -57,6 +56,41 @@
 
 .rightbarContainerProfile {
   display: none;
+}
+
+.userImgEdit {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  /* background-color: limegreen; */
+  position: absolute;
+  top: 165px;
+  left: 0;
+  right: -85px;
+  margin: auto;
+  /* border: 2px solid white; */
+}
+
+.coverImgEdit {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  /* background-color: pink; */
+  position: absolute;
+  top: 2px;
+  right: 15px;
+  /* border: 2px solid white; */
+}
+
+.editImg {
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: white;
+}
+
+.editImg:hover {
+  background-color: #d9d9d9;
+  cursor: pointer;
 }
 
 /* wider than 800px */
