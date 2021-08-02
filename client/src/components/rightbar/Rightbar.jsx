@@ -1,11 +1,11 @@
 import "./rightbar.css";
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useRef, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Remove, Edit } from "@material-ui/icons";
 
 export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -14,12 +14,17 @@ export default function Rightbar({ user }) {
   const [followed, setFollowed] = useState(
     currentUser.followings.includes(user?._id)
   );
+  const [editing, setEditing] = useState(false);
+  const city = useRef();
+  const from = useRef();
+  const relationship = useRef();
+  const [cityEditing, setCityEditing] = useState();
+  const [fromEditing, setFromEditing] = useState();
+
 
   useEffect(() => {
     setFollowed(currentUser.followings.includes(user?._id))
   }, [currentUser, user?._id, followed])
-
-
 
   useEffect(() => {
     const getFriends = async () => {
@@ -51,7 +56,41 @@ export default function Rightbar({ user }) {
     }
   };
 
-  console.log("followed: " + followed);
+  // console.log("followed: " + followed);
+
+  const editHandler = () => {
+    setEditing(true);
+    setCityEditing(user.city);
+    setFromEditing(user.from);
+  }
+
+  const editProfileHandler = (e) => {
+
+    console.log("edit submit")
+    const updateUser = {
+      userId: user._id,
+      // password: user.password,
+      city: city.current.value,
+      from: from.current.value,
+      relationship: relationship.current.value,
+    };
+    try {
+      axios.put("/users/" + user._id, updateUser);
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+    setEditing(false);
+  }
+
+  const cityHandler = (value) => {
+    setCityEditing(value);
+  }
+
+  const fromHandler = (value) => {
+    setFromEditing(value);
+  }
+
 
   const HomeRightbar = () => {
     return (
@@ -73,6 +112,8 @@ export default function Rightbar({ user }) {
     );
   };
 
+
+
   const ProfileRightbar = () => {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -84,79 +125,75 @@ export default function Rightbar({ user }) {
             {followed ? <Remove /> : <Add />}
           </button>
         )}
-        <h4 className="rightbarTitle">User information</h4>
-        <div className="rightbarInfo">
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">City:</span>
-            <span className="rightbarInfoValue">{user.city}</span>
-          </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">From:</span>
-            <span className="rightbarInfoValue">{user.from}</span>
-          </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">Relationship:</span>
-            <span className="rightbarInfoValue">
-              {user.relationship === 1
-                ? "Single"
-                : user.relationship === 2
-                  ? "Married"
-                  : "-"}
-            </span>
-          </div>
+        <div className="flexContainer">
+          <h4 className="rightbarTitle">User information</h4>
+          <span className="profileEdit"><Edit htmlColor="Black" className="editIcon" onClick={editHandler} /></span>
         </div>
+
+        {!editing && (
+          <>
+            <div className="rightbarInfo">
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">City:</span>
+                <span className="rightbarInfoValue">{user.city}</span>
+              </div>
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">From:</span>
+                <span className="rightbarInfoValue">{user.from}</span>
+              </div>
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">Relationship:</span>
+                <span className="rightbarInfoValue">
+                  {user.relationship === 1
+                    ? "Single"
+                    : user.relationship === 2
+                      ? "Married"
+                      : "-"}
+                </span>
+              </div>
+            </div>
+          </>
+        )}
+
+        {editing && (
+          <>
+            <form className="rightbarInfo" onSubmit={editProfileHandler}>
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">City:</span>
+                <input
+                  value={cityEditing}
+                  className=""
+                  ref={city}
+                  onChange={(e) => cityHandler(e.target.value)}
+                />
+              </div>
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">From:</span>
+                <input
+                  value={fromEditing}
+                  className=""
+                  ref={from}
+                  onChange={(e) => fromHandler(e.target.value)}
+                />
+              </div>
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">Relationship:</span>
+                <select ref={relationship} name="relationship-menu" id="relationship-menu">
+                  <option value="1">Single</option>
+                  <option value="2">Married</option>
+                  <option value="3"> - </option>
+                </select>
+              </div>
+              <button onClick={() => setEditing(false)}>Cancel Editing</button>
+              <button type="submit">Submit</button>
+            </form>
+          </>
+        )}
+
+
+
         <h4 className="rightbarTitle">User friends</h4>
         <div className="rightbarFollowings">
-
-          {/* <div className="rightbarFollowing">
-            <img
-              src={`${PF}fish/10.jpg`}
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">{Users[9].username}</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src={`${PF}fish/2.jpg`}
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">{Users[1].username}</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src={`${PF}fish/3.jpg`}
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">{Users[2].username}</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src={`${PF}fish/4.jpg`}
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">{Users[3].username}</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src={`${PF}fish/5.jpg`}
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">{Users[4].username}</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src={`${PF}fish/6.jpg`}
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">{Users[5].username}</span>
-          </div> */}
-
           {friends.map((friend) => (
             <Link
               to={"/profile/" + friend.username}
