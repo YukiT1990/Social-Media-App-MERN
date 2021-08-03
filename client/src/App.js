@@ -2,6 +2,7 @@ import Home from "./pages/home/Home"
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
+import RightbarPage from "./pages/rightbar/RightbarPage";
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/profile/:username">
           {user ? <Profile /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/rightbar/:username">
+          {user ? <RightbarPage /> : <Redirect to="/login" />}
         </Route>
       </Switch>
     </Router>

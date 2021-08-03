@@ -33,6 +33,7 @@
 }
 
 .profileInfo {
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,7 +106,7 @@
 
 .descForm {
   /* border: none; */
-  width: 50%;
+  width: 80%;
 }
 
 .descForm:focus {
@@ -113,13 +114,36 @@
   font-size: 14px;
 }
 
-.messageboard {
+.messageboardC {
   z-index: 100;
   background-color: white;
-  box-shadow: 10px 5px 5px skyblue, -2px 1px 2px #e6e6e6;
+  box-shadow: 5px 5px 5px #e6e6e6, -2px -2px 2px #e6e6e6;
   border-radius: 10px;
   width: 320px;
   height: 100px;
+  position: absolute;
+  top: 100px;
+  right: 15px;
+}
+
+.messageboardU {
+  z-index: 100;
+  background-color: white;
+  box-shadow: 5px 5px 5px #e6e6e6, -2px -2px 2px #e6e6e6;
+  border-radius: 10px;
+  width: 320px;
+  height: 100px;
+  position: absolute;
+  top: 300px;
+  right: 15px;
+}
+
+.buttons {
+  position: relative;
+}
+
+.buttonsDesc {
+  margin-top: 5px;
 }
 
 .uploadButton {
@@ -152,6 +176,11 @@
 
   .rightbarContainerProfile {
     display: block;
+  }
+
+  .descForm {
+    /* border: none; */
+    width: 50%;
   }
 }
 

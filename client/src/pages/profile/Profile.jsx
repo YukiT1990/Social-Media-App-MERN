@@ -136,16 +136,21 @@ export default function Profile() {
                   />
                 </label>
                 {editingCoverImg && (
-                  <div className="messageboard">
+                  <div className="messageboardC">
+                    {!coverImgFile && (
+                      <p>File Name</p>
+                    )}
                     {coverImgFile && (
                       <p>{coverImgFile.name}</p>
                     )}
-                    <button className="cancelButton" onClick={() => setEditingCoverImg(false)}>
-                      Cancel
-                    </button>
-                    <button className="uploadButton" type="submit">
-                      Upload Cover Image
-                    </button>
+                    <div className="buttons">
+                      <button className="cancelButton" onClick={() => setEditingCoverImg(false)}>
+                        Cancel
+                      </button>
+                      <button className="uploadButton" type="submit">
+                        Upload Cover Image
+                      </button>
+                    </div>
                   </div>
                 )}
               </form>
@@ -168,16 +173,21 @@ export default function Profile() {
                   />
                 </label>
                 {editingUserImg && (
-                  <div className="messageboard">
+                  <div className="messageboardU">
+                    {!userImgFile && (
+                      <p>File Name</p>
+                    )}
                     {userImgFile && (
                       <p>{userImgFile.name}</p>
                     )}
-                    <button className="cancelButton" onClick={() => setEditingUserImg(false)}>
-                      Cancel
-                    </button>
-                    <button className="uploadButton" type="submit">
-                      Upload Profile Image
-                    </button>
+                    <div className="buttons">
+                      <button className="cancelButton" onClick={() => setEditingUserImg(false)}>
+                        Cancel
+                      </button>
+                      <button className="uploadButton" type="submit">
+                        Upload Profile Image
+                      </button>
+                    </div>
                   </div>
                 )}
               </form>
@@ -199,8 +209,10 @@ export default function Profile() {
                   className="descForm"
                   ref={desc}
                 />
-                <button onClick={() => setEditingDesc(false)}>Cancel Editing</button>
-                <button type="submit">Submit</button>
+                <div className="buttonsDesc">
+                  <button className="cancelButton" onClick={() => setEditingDesc(false)}>Cancel</button>
+                  <button className="uploadButton" type="submit">Submit</button>
+                </div>
               </form>
             )}
 

@@ -1,7 +1,8 @@
-.feed{
-  flex:5.5
+.feed {
+  flex: 5.5;
+  max-width: 95vw;
 }
 
-.feedWrapper{
+.feedWrapper {
   padding: 20px;
 }
