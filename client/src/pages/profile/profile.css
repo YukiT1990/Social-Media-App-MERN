@@ -8,6 +8,7 @@
 }
 
 .profileCover {
+  z-index: auto;
   height: 320px;
   position: relative;
 }
@@ -82,6 +83,15 @@
   /* border: 2px solid white; */
 }
 
+.descEdit {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  top: 405px;
+  right: 25px;
+}
+
 .editImg {
   border-radius: 50%;
   border: 2px solid white;
@@ -91,6 +101,47 @@
 .editImg:hover {
   background-color: #d9d9d9;
   cursor: pointer;
+}
+
+.descForm {
+  /* border: none; */
+  width: 50%;
+}
+
+.descForm:focus {
+  /* outline: none; */
+  font-size: 14px;
+}
+
+.messageboard {
+  z-index: 100;
+  background-color: white;
+  box-shadow: 10px 5px 5px skyblue, -2px 1px 2px #e6e6e6;
+  border-radius: 10px;
+  width: 320px;
+  height: 100px;
+}
+
+.uploadButton {
+  border: none;
+  padding: 7px;
+  border-radius: 5px;
+  background-color: green;
+  font-weight: 500;
+  margin-right: 20px;
+  cursor: pointer;
+  color: white;
+}
+
+.cancelButton {
+  border: none;
+  padding: 7px;
+  border-radius: 5px;
+  background-color: red;
+  font-weight: 500;
+  margin-right: 20px;
+  cursor: pointer;
+  color: white;
 }
 
 /* wider than 800px */

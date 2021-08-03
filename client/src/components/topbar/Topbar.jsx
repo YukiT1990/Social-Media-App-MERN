@@ -33,7 +33,9 @@ export default function Topbar() {
           <Link to="/" style={{ textDecoration: "none" }}>
             <span className="topbarLink">Homepage</span>
           </Link>
-          <span className="topbarLink">Timeline</span>
+          <Link to={`/profile/${user.username}`} style={{ textDecoration: "none" }}>
+            <span className="topbarLink">Timeline</span>
+          </Link>
           {user &&
             <span className="topbarLink" onClick={logoutHandler}>Logout</span>
           }
