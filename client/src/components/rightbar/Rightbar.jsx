@@ -18,8 +18,8 @@ export default function Rightbar({ user }) {
   const city = useRef();
   const from = useRef();
   const relationship = useRef();
-  const [cityEditing, setCityEditing] = useState();
-  const [fromEditing, setFromEditing] = useState();
+  // const [cityEditing, setCityEditing] = useState();
+  // const [fromEditing, setFromEditing] = useState();
 
 
   useEffect(() => {
@@ -60,8 +60,8 @@ export default function Rightbar({ user }) {
 
   const editHandler = () => {
     setEditing(true);
-    setCityEditing(user.city);
-    setFromEditing(user.from);
+    // setCityEditing(user.city);
+    // setFromEditing(user.from);
   }
 
   const editProfileHandler = (e) => {
@@ -83,15 +83,6 @@ export default function Rightbar({ user }) {
     setEditing(false);
   }
 
-  const cityHandler = (value) => {
-    setCityEditing(value);
-  }
-
-  const fromHandler = (value) => {
-    setFromEditing(value);
-  }
-
-
   const HomeRightbar = () => {
     return (
       <>
@@ -112,8 +103,6 @@ export default function Rightbar({ user }) {
     );
   };
 
-
-
   const ProfileRightbar = () => {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -125,13 +114,17 @@ export default function Rightbar({ user }) {
             {followed ? <Remove /> : <Add />}
           </button>
         )}
-        <div className="flexContainer">
+        {/* <div className="flexContainer">
           <h4 className="rightbarTitle">User information</h4>
           <span className="profileEdit"><Edit htmlColor="Black" className="editIcon" onClick={editHandler} /></span>
-        </div>
+        </div> */}
 
         {!editing && (
           <>
+            <div className="flexContainer">
+              <h4 className="rightbarTitle">User information</h4>
+              <span className="profileEdit"><Edit htmlColor="Black" className="editIcon" onClick={editHandler} /></span>
+            </div>
             <div className="rightbarInfo">
               <div className="rightbarInfoItem">
                 <span className="rightbarInfoKey">City:</span>
@@ -157,23 +150,25 @@ export default function Rightbar({ user }) {
 
         {editing && (
           <>
+            <div className="flexContainer">
+              <h4 className="rightbarTitle">User information</h4>
+
+            </div>
             <form className="rightbarInfo" onSubmit={editProfileHandler}>
               <div className="rightbarInfoItem">
                 <span className="rightbarInfoKey">City:</span>
                 <input
-                  value={cityEditing}
-                  className=""
+                  defaultValue={user.city}
+                  className="cityfromEdit"
                   ref={city}
-                  onChange={(e) => cityHandler(e.target.value)}
                 />
               </div>
               <div className="rightbarInfoItem">
                 <span className="rightbarInfoKey">From:</span>
                 <input
-                  value={fromEditing}
-                  className=""
+                  defaultValue={user.from}
+                  className="cityfromEdit"
                   ref={from}
-                  onChange={(e) => fromHandler(e.target.value)}
                 />
               </div>
               <div className="rightbarInfoItem">
@@ -184,13 +179,11 @@ export default function Rightbar({ user }) {
                   <option value="3"> - </option>
                 </select>
               </div>
-              <button onClick={() => setEditing(false)}>Cancel Editing</button>
-              <button type="submit">Submit</button>
+              <button className="cancelButton" onClick={() => setEditing(false)}>Cancel</button>
+              <button className="uploadButton" type="submit">Submit</button>
             </form>
           </>
         )}
-
-
 
         <h4 className="rightbarTitle">User friends</h4>
         <div className="rightbarFollowings">
@@ -219,6 +212,7 @@ export default function Rightbar({ user }) {
       </>
     );
   };
+
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
