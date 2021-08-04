@@ -6,6 +6,16 @@ const bcrypt = require("bcrypt");
 //   res.send("hey its user route");
 // })
 
+// find all users
+router.get("/all", async (req, res) => {
+  try {
+    const allUsers = await User.find({});
+    res.status(200).json(allUsers);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+})
+
 // update user
 router.put("/:id", async (req, res) => {
   if (req.body.userId === req.params.id || req.body.isAdmin) {

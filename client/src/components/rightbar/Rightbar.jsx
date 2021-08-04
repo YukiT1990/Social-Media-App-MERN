@@ -123,7 +123,9 @@ export default function Rightbar({ user }) {
           <>
             <div className="flexContainer">
               <h4 className="rightbarTitle">User information</h4>
-              <span className="profileEdit"><Edit htmlColor="Black" className="editIcon" onClick={editHandler} /></span>
+              {user._id === currentUser._id && (
+                <span className="profileEdit"><Edit htmlColor="Black" className="editIcon" onClick={editHandler} /></span>
+              )}
             </div>
             <div className="rightbarInfo">
               <div className="rightbarInfoItem">

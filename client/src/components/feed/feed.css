@@ -5,4 +5,5 @@
 
 .feedWrapper {
   padding: 20px;
+  min-width: 55vw;
 }
