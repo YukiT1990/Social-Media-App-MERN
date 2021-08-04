@@ -18,13 +18,14 @@ const RightbarPage = () => {
   }, [username]);
 
   return (
-    <>
+
+    <div className="rightbarPage">
       <Topbar />
       {user && (
         <Rightbar user={user} />
       )}
       <Rightbar />
-    </>
+    </div>
   )
 }
 

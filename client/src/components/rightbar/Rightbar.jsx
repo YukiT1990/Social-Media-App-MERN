@@ -1,5 +1,4 @@
 import "./rightbar.css";
-import { Users } from "../../dummyData";
 import Online from "../online/Online";
 import { useContext, useRef, useEffect, useState } from "react";
 import axios from "axios";
@@ -18,8 +17,7 @@ export default function Rightbar({ user }) {
   const city = useRef();
   const from = useRef();
   const relationship = useRef();
-  // const [cityEditing, setCityEditing] = useState();
-  // const [fromEditing, setFromEditing] = useState();
+  const [dummyUsers, setDummyUsers] = useState([]);
 
 
   useEffect(() => {
@@ -37,6 +35,20 @@ export default function Rightbar({ user }) {
     };
     getFriends();
   }, [user]);
+
+  useEffect(() => {
+    // dummy user data
+    fetch("https://my-json-server.typicode.com/YukiT1990/Social-Media-App-MERN/Users")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setDummyUsers(result);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+  }, [])
 
   const handleClick = async () => {
     try {
@@ -84,6 +96,7 @@ export default function Rightbar({ user }) {
   }
 
   const HomeRightbar = () => {
+    // console.log("dummyUsers: " + JSON.stringify(dummyUsers, null, 2));
     return (
       <>
         <div className="birthdayContainer">
@@ -93,9 +106,9 @@ export default function Rightbar({ user }) {
           </span>
         </div>
         <img className="rightbarAd" src={`${PF}ad.png`} alt="" />
-        <h4 className="rightbarTitle">Online Friends</h4>
+        <h4 className="rightbarTitle">Users also viewed</h4>
         <ul className="rightbarFriendList">
-          {Users.map((user) => (
+          {dummyUsers.map((user) => (
             <Online key={user.id} user={user} />
           ))}
         </ul>

@@ -77,6 +77,7 @@ export default function Sidebar() {
         <ul className="sidebarFriendList">
           {allUsers.map((user) => (
             <Link
+              key={user._id}
               to={"/profile/" + user.username}
               style={{ textDecoration: "none", color: "black" }}
             >
