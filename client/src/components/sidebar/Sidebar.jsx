@@ -10,10 +10,26 @@ import {
   Event,
   School,
 } from "@material-ui/icons";
-import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
+  const [allUsers, setAllUsers] = useState([]);
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        const allUsersList = await axios.get("/users/all");
+        setAllUsers(allUsersList.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getAllUsers();
+  }, []);
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -57,9 +73,15 @@ export default function Sidebar() {
         </ul>
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
+        <h3>All Users</h3>
         <ul className="sidebarFriendList">
-          {Users.map((user) => (
-            <CloseFriend key={user.id} user={user} />
+          {allUsers.map((user) => (
+            <Link
+              to={"/profile/" + user.username}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <CloseFriend key={user.id} user={user} />
+            </Link>
           ))}
         </ul>
       </div>

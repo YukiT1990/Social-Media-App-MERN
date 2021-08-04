@@ -3,10 +3,11 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios"
 import { useParams } from "react-router"
 import { Edit, Cancel } from "@material-ui/icons";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -18,6 +19,7 @@ export default function Profile() {
   const [userImgFile, setUserImgFile] = useState(null);
   const [coverImgFile, setCoverImgFile] = useState(null);
   const desc = useRef();
+  const { user: currentUser } = useContext(AuthContext);
 
   const editDescHandler = () => {
     setEditingDesc(true);
@@ -108,6 +110,8 @@ export default function Profile() {
     fetchUser();
   }, [username]);
 
+  console.log("currentUser: " + JSON.stringify(currentUser, null, 2));
+
   return (
     <>
       <Topbar />
@@ -126,7 +130,9 @@ export default function Profile() {
                   alt=""
                 />
                 <label htmlFor="coverImgFile">
-                  <span className="coverImgEdit"><Edit htmlColor="Black" className="editImg" onClick={() => setEditingCoverImg(true)} /></span>
+                  {user._id === currentUser._id && (
+                    <span className="coverImgEdit"><Edit htmlColor="Black" className="editImg" onClick={() => setEditingCoverImg(true)} /></span>
+                  )}
                   <input
                     style={{ display: "none" }}
                     type="file"
@@ -163,7 +169,10 @@ export default function Profile() {
                   alt=""
                 />
                 <label htmlFor="userImgfile">
-                  <span className="userImgEdit"><Edit htmlColor="Black" className="editImg" onClick={() => setEditingUserImg(true)} /></span>
+                  {user._id === currentUser._id && (
+                    <span className="userImgEdit"><Edit htmlColor="Black" className="editImg" onClick={() => setEditingUserImg(true)} /></span>
+                  )}
+
                   <input
                     style={{ display: "none" }}
                     type="file"
@@ -198,7 +207,10 @@ export default function Profile() {
               <div className="profileInfo">
                 <h4 className="profileInfoName">{user.username}</h4>
                 <span className="profileInfoDesc">{user.desc ? user.desc : "Add description"}</span>
-                <span className="descEdit"><Edit htmlColor="Black" className="editImg" onClick={() => editDescHandler()} /></span>
+                {user._id === currentUser._id && (
+                  <span className="descEdit"><Edit htmlColor="Black" className="editImg" onClick={() => editDescHandler()} /></span>
+                )}
+
               </div>
             )}
             {editingDesc && (
