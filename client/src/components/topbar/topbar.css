@@ -13,10 +13,20 @@
 .topbarLeft {
   /* background-color: pink; */
   flex: 4;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebarIcon {
+  color: white;
+}
+
+.sidebarIcon:hover {
+  cursor: pointer;
 }
 
 .logo {
-  font-size: min(24px, 12/375 * 100vw);
+  font-size: min(22px, 12/375 * 100vw);
   margin-left: 20px;
   font-weight: bold;
   color: white;
@@ -141,8 +151,8 @@
   }
 
   .logo {
-    font-size: 24px;
-    margin-left: 20px;
+    font-size: 22px;
+    margin-left: 0px;
   }
 
   .topbarCenter {
@@ -193,11 +203,24 @@
     flex: 3;
   }
 
+  .logo {
+    font-size: 24px;
+    margin-left: 20px;
+  }
+
+  .sidebarIcon {
+    display: none;
+  }
+
   .topbarCenter {
     flex: 5;
   }
 
   .topbarRight {
     flex: 4;
+  }
+
+  .sidebar {
+    display: none;
   }
 }

@@ -1,13 +1,15 @@
 import "./topbar.css";
-import { Search, Person, Chat, Notifications, MenuOpen } from "@material-ui/icons";
+import { Search, Person, Chat, Notifications, MenuOpen, Menu, Close } from "@material-ui/icons";
 import { Link } from "react-router-dom"
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import Sidebar from "../../components/sidebar/Sidebar";
 
 export default function Topbar() {
   const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [searching, setSearching] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState();
 
 
   const logoutHandler = () => {
@@ -18,6 +20,14 @@ export default function Topbar() {
     <>
       <div className="topbarContainer">
         <div className="topbarLeft">
+          <div className="sidebarIcon" onClick={() => setSidebarOpen(!sidebarOpen)}>
+            {!sidebarOpen && (
+              <Menu />
+            )}
+            {sidebarOpen && (
+              <Close />
+            )}
+          </div>
           <Link to="/" style={{ textDecoration: "none" }}>
             <span className="logo">Under The Water</span>
           </Link>
@@ -38,6 +48,7 @@ export default function Topbar() {
         </div>
         <div className="topbarRight">
           <div className="topbarLinks">
+
             <Link to="/" style={{ textDecoration: "none" }}>
               <span className="topbarLink">Homepage</span>
             </Link>
@@ -93,7 +104,9 @@ export default function Topbar() {
             className="searchInput"
           />
         </div>
-
+      )}
+      {sidebarOpen && (
+        <Sidebar className="sidebar" />
       )}
     </>
   );

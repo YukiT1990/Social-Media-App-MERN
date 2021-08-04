@@ -6,7 +6,7 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios"
 import { useParams } from "react-router"
-import { Edit, Cancel } from "@material-ui/icons";
+import { Edit } from "@material-ui/icons";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Profile() {
