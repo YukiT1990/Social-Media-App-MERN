@@ -9,14 +9,14 @@ export default function Home() {
   return (
     <>
       <Topbar />
-      <div className="homeContainer">
-        <div className="sidebarContainer">
+      <div className="homeContainerH">
+        <div className="sidebarContainerH">
           <Sidebar />
         </div>
-        <div className="feedContainer">
+        <div className="feedContainerH">
           <Feed />
         </div>
-        <div className="rightbarContainer">
+        <div className="rightbarContainerH">
           <Rightbar />
         </div>
       </div>

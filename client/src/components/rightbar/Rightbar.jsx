@@ -188,7 +188,7 @@ export default function Rightbar({ user }) {
               </div>
               <div className="rightbarInfoItem">
                 <span className="rightbarInfoKey">Relationship:</span>
-                <select ref={relationship} name="relationship-menu" id="relationship-menu">
+                <select defaultValue={user.relationship} ref={relationship} name="relationship-menu" id="relationship-menu">
                   <option value="1">Single</option>
                   <option value="2">Married</option>
                   <option value="3"> - </option>

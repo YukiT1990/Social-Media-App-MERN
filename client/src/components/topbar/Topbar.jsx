@@ -1,16 +1,44 @@
 import "./topbar.css";
 import { Search, Person, Chat, Notifications, MenuOpen, Menu, Close } from "@material-ui/icons";
-import { Link } from "react-router-dom"
-import { useContext, useState } from "react";
+import { Link, useLocation } from "react-router-dom"
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Sidebar from "../../components/sidebar/Sidebar";
+// import RightbarPage from "../../components/rightbarPage/RightbarPage";
+const WIDTH_THRESHOLD_LARGE = 1100;
+// const WIDTH_THRESHOLD_MIDDLE = 800;
 
 export default function Topbar() {
   const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [searching, setSearching] = useState(false);
+  const [rightbarOpen, setRightbarOpen] = useState();
   const [sidebarOpen, setSidebarOpen] = useState();
+  const location = useLocation();
+  // const [path, setPath] = useState(location.pathname);
+  const [width, setWidth] = useState(null)
+  const updateWidth = (event) => {
+    setWidth(window.innerWidth)
+  }
 
+
+  useEffect(() => {
+    window.addEventListener(`resize`, updateWidth, {
+      capture: false,
+      passive: true,
+    })
+    return () => window.removeEventListener(`resize`, updateWidth)
+  })
+
+  useEffect(() => {
+    console.log("close sidebar and rightbar");
+    setRightbarOpen(false);
+    setSidebarOpen(false);
+  }, [location.pathname])
+
+  console.log("width: " + width);
+  console.log("location.pathname: " + location.pathname);
+  // console.log("path: " + path);
 
   const logoutHandler = () => {
     dispatch({ type: "LOGOUT" });
@@ -89,12 +117,22 @@ export default function Topbar() {
               className="topbarImg"
             />
           </Link>
+
           <div className="smallscreen">
             <Link to={`/rightbar/${user.username}`} style={{ textDecoration: "none", color: "white" }}>
               <MenuOpen />
             </Link>
-
           </div>
+
+          {/* <div className="smallscreen" onClick={() => setRightbarOpen(!rightbarOpen)}>
+            {!rightbarOpen && (
+              <MenuOpen />
+            )}
+            {rightbarOpen && (
+              <Close />
+            )}
+          </div> */}
+
         </div>
       </div>
       {searching && (
@@ -105,9 +143,14 @@ export default function Topbar() {
           />
         </div>
       )}
-      {sidebarOpen && (
-        <Sidebar className="sidebar" />
+      {width < WIDTH_THRESHOLD_LARGE && sidebarOpen && (
+        <div className="sidebar">
+          <Sidebar />
+        </div>
       )}
+      {/* {width < WIDTH_THRESHOLD_MIDDLE && rightbarOpen && (
+        <RightbarPage />
+      )} */}
     </>
   );
 }

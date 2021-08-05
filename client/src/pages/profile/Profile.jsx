@@ -110,7 +110,7 @@ export default function Profile() {
     fetchUser();
   }, [username]);
 
-  console.log("currentUser: " + JSON.stringify(currentUser, null, 2));
+  // console.log("currentUser: " + JSON.stringify(currentUser, null, 2));
 
   return (
     <>
@@ -227,8 +227,14 @@ export default function Profile() {
                 </div>
               </form>
             )}
-
           </div>
+
+          {user._id !== currentUser._id && (
+            <div className="rightbarContainerForSmallscreen">
+              <Rightbar user={user} />
+            </div>
+          )}
+
           <div className="profileRightBottom">
             <div className="feedContainerProfile">
               <Feed username={username} />
