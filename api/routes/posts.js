@@ -78,6 +78,18 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// search posts by a keyword
+router.get("/search/:keyword", async (req, res) => {
+  const keyword = req.params.keyword;
+  try {
+    const results = await Post.find({ desc: { $regex: keyword, $options: "i" } });
+    // const results = await Post.find({ desc: keyword });
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // get timeline posts
 router.get("/timeline/:userId", async (req, res) => {
   try {

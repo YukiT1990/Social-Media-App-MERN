@@ -122,6 +122,10 @@
   cursor: pointer;
 }
 
+.searchresults {
+  background-color: white;
+}
+
 /* wider than 600px */
 @media screen and (min-width: 600px) {
   .topbarLeft {

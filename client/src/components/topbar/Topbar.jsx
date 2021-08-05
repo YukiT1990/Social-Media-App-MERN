@@ -24,6 +24,7 @@ export default function Topbar() {
   const [searchKeyword, setSearchKeyword] = useState(null);
   const keyword = useRef();
   const [resultUsers, setResultUsers] = useState([]);
+  const [resultPosts, setResultPosts] = useState([]);
 
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export default function Topbar() {
     setSidebarOpen(false);
     setSearchKeyword(null);
     setResultUsers([]);
+    setResultPosts([]);
   }, [location.pathname])
 
   // console.log("width: " + width);
@@ -63,8 +65,18 @@ export default function Topbar() {
         }
       };
       searchUsers();
+      const searchPosts = async () => {
+        try {
+          const result = await axios.get("/posts/search/" + searchKeyword);
+          setResultPosts(result.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      searchPosts();
     } else {
       setResultUsers([]);
+      setResultPosts([]);
     }
   }, [searchKeyword])
 
@@ -175,25 +187,44 @@ export default function Topbar() {
           />
         </div>
       )}
-      {width < WIDTH_THRESHOLD_LARGE && sidebarOpen && (
-        <div className="sidebar">
-          <Sidebar />
-        </div>
-      )}
-      {searchKeyword && resultUsers && resultUsers.length > 0 && (
-        <h3>User</h3>
-      )}
-      {resultUsers && resultUsers.length > 0 && (
-        resultUsers.map((user) => (
-          <Link
-            to={"/profile/" + user.username}
-            style={{ textDecoration: "none", color: "black" }}
-            key={user._id}
-          >
-            <p>{user.username}</p>
-          </Link>
-        )
-        ))}
+      <div className="searchresults">
+        {width < WIDTH_THRESHOLD_LARGE && sidebarOpen && (
+          <div className="sidebar">
+            <Sidebar />
+          </div>
+        )}
+        {searchKeyword && resultUsers && resultUsers.length > 0 && (
+          <h3>User</h3>
+        )}
+        {resultUsers && resultUsers.length > 0 && (
+          resultUsers.map((user) => (
+            <Link
+              to={"/profile/" + user.username}
+              style={{ textDecoration: "none", color: "black" }}
+              key={user._id}
+            >
+              <p>{user.username}</p>
+            </Link>
+          )
+          ))}
+
+        {searchKeyword && resultPosts && resultPosts.length > 0 && (
+          <h3>Post</h3>
+        )}
+        {resultPosts && resultPosts.length > 0 && (
+          resultPosts.map((post) => (
+            <Link
+              to={post._id}
+              style={{ textDecoration: "none", color: "black" }}
+              key={post._id}
+            >
+              <p>
+                {post.desc && post.desc.length < 50 ? post.desc : post.desc.substring(0, 50)}
+              </p>
+            </Link>
+          )
+          ))}
+      </div>
       {/* {width < WIDTH_THRESHOLD_MEDIUM && rightbarOpen && (
         <RightbarPage />
       )} */}
