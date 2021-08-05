@@ -1,18 +1,19 @@
 import "./topbar.css";
 import { Search, Person, Chat, Notifications, MenuOpen, Menu, Close } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom"
-import { useContext, useState, useEffect } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Sidebar from "../../components/sidebar/Sidebar";
+import axios from "axios";
 // import RightbarPage from "../../components/rightbarPage/RightbarPage";
 const WIDTH_THRESHOLD_LARGE = 1100;
-// const WIDTH_THRESHOLD_MIDDLE = 800;
+// const WIDTH_THRESHOLD_MEDIUM = 800;
 
 export default function Topbar() {
   const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [searching, setSearching] = useState(false);
-  const [rightbarOpen, setRightbarOpen] = useState();
+  // const [rightbarOpen, setRightbarOpen] = useState();
   const [sidebarOpen, setSidebarOpen] = useState();
   const location = useLocation();
   // const [path, setPath] = useState(location.pathname);
@@ -20,6 +21,9 @@ export default function Topbar() {
   const updateWidth = (event) => {
     setWidth(window.innerWidth)
   }
+  const [searchKeyword, setSearchKeyword] = useState(null);
+  const keyword = useRef();
+  const [resultUsers, setResultUsers] = useState([]);
 
 
   useEffect(() => {
@@ -32,17 +36,37 @@ export default function Topbar() {
 
   useEffect(() => {
     console.log("close sidebar and rightbar");
-    setRightbarOpen(false);
+    // setRightbarOpen(false);
     setSidebarOpen(false);
+    setSearchKeyword(null);
+    setResultUsers([]);
   }, [location.pathname])
 
-  console.log("width: " + width);
-  console.log("location.pathname: " + location.pathname);
+  // console.log("width: " + width);
+  // console.log("location.pathname: " + location.pathname);
   // console.log("path: " + path);
+  // console.log("searchKeyword: " + searchKeyword);  //resultUsers
+  // console.log("resultUsers: " + resultUsers);
 
   const logoutHandler = () => {
     dispatch({ type: "LOGOUT" });
   };
+
+  useEffect(() => {
+    if (searchKeyword) {
+      const searchUsers = async () => {
+        try {
+          const result = await axios.get("/users/search/" + searchKeyword);
+          setResultUsers(result.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      searchUsers();
+    } else {
+      setResultUsers([]);
+    }
+  }, [searchKeyword])
 
   return (
     <>
@@ -63,9 +87,13 @@ export default function Topbar() {
         <div className="topbarCenter">
           <div className="searchbar">
             <Search className="searchIcon" />
+            {/* search input for large screen */}
             <input
-              placeholder="Search for friend, post or video"
+              placeholder="Search for friend or post"
               className="searchInput"
+              ref={keyword}
+              defaultValue={searchKeyword}
+              onChange={keyword.current ? () => setSearchKeyword(keyword.current.value) : () => setSearchKeyword(null)}
             />
           </div>
           <div className="searchIconForSmallScreen">
@@ -137,9 +165,13 @@ export default function Topbar() {
       </div>
       {searching && (
         <div className="searchInputForSmallScreen">
+          {/* search input for small screen */}
           <input
-            placeholder="Search for friend, post or video"
+            placeholder="Search for friend or post"
             className="searchInput"
+            ref={keyword}
+            defaultValue={searchKeyword}
+            onChange={keyword.current ? () => setSearchKeyword(keyword.current.value) : () => setSearchKeyword(null)}
           />
         </div>
       )}
@@ -148,7 +180,21 @@ export default function Topbar() {
           <Sidebar />
         </div>
       )}
-      {/* {width < WIDTH_THRESHOLD_MIDDLE && rightbarOpen && (
+      {searchKeyword && resultUsers && resultUsers.length > 0 && (
+        <h3>User</h3>
+      )}
+      {resultUsers && resultUsers.length > 0 && (
+        resultUsers.map((user) => (
+          <Link
+            to={"/profile/" + user.username}
+            style={{ textDecoration: "none", color: "black" }}
+            key={user._id}
+          >
+            <p>{user.username}</p>
+          </Link>
+        )
+        ))}
+      {/* {width < WIDTH_THRESHOLD_MEDIUM && rightbarOpen && (
         <RightbarPage />
       )} */}
     </>

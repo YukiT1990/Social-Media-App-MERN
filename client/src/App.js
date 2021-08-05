@@ -9,11 +9,25 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
+const WIDTH_THRESHOLD_MEDIUM = 800;
 
 function App() {
   const { user } = useContext(AuthContext);
+  const [width, setWidth] = useState(null)
+  const updateWidth = (event) => {
+    setWidth(window.innerWidth)
+  }
+
+
+  useEffect(() => {
+    window.addEventListener(`resize`, updateWidth, {
+      capture: false,
+      passive: true,
+    })
+    return () => window.removeEventListener(`resize`, updateWidth)
+  })
 
   return (
     <Router>
@@ -31,7 +45,7 @@ function App() {
           {user ? <Profile /> : <Redirect to="/login" />}
         </Route>
         <Route path="/rightbar/:username">
-          {user ? <RightbarPage /> : <Redirect to="/login" />}
+          {user ? (width < WIDTH_THRESHOLD_MEDIUM ? <RightbarPage /> : <Profile />) : <Redirect to="/login" />}
         </Route>
       </Switch>
     </Router>
