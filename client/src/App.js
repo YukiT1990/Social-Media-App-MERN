@@ -3,6 +3,7 @@ import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import RightbarPage from "./pages/rightbar/RightbarPage";
+import TargetPost from "./pages/targetPost/TargetPost";
 import {
   BrowserRouter as Router,
   Switch,
@@ -46,6 +47,9 @@ function App() {
         </Route>
         <Route path="/rightbar/:username">
           {user ? (width < WIDTH_THRESHOLD_MEDIUM ? <RightbarPage /> : <Profile />) : <Redirect to="/login" />}
+        </Route>
+        <Route path="/:postid">
+          <TargetPost />
         </Route>
       </Switch>
     </Router>
