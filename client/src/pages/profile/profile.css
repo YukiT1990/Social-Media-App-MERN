@@ -1,4 +1,5 @@
 .profile {
+  /* z-index: 3; */
   display: flex;
   flex-direction: column;
 }
@@ -181,6 +182,10 @@
   .descForm {
     /* border: none; */
     width: 50%;
+  }
+
+  .rightbarContainerForSmallscreen {
+    display: none;
   }
 }
 

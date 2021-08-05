@@ -1,31 +1,32 @@
-.homeContainer{
+.homeContainerH {
+  /* z-index: 2; */
   display: flex;
   width: 100%;
   flex-direction: column;
 }
 
-.sidebarContainer {
+.sidebarContainerH {
   display: none;
 }
 
-.rightbarContainer {
+.rightbarContainerH {
   display: none;
 }
 
 /* wider than 800px */
 @media screen and (min-width: 800px) {
-  .homeContainer {
+  .homeContainerH {
     flex-direction: row;
   }
 
-  .rightbarContainer {
+  .rightbarContainerH {
     display: block;
   }
 }
 
 /* wider than 1100px */
 @media screen and (min-width: 1100px) {
-  .sidebarContainer {
+  .sidebarContainerH {
     display: block;
   }
 }

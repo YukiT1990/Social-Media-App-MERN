@@ -1,3 +1,5 @@
 .rightbarPage {
   z-index: 50;
+  overflow-y: scroll;
+  position: sticky;
 }
