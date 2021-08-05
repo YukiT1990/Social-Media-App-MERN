@@ -105,7 +105,8 @@ export default function Rightbar({ user }) {
             <b>Commet</b> and <b>3 other friends</b> have a birhday today.
           </span>
         </div>
-        <img className="rightbarAd" src={`${PF}ad.png`} alt="" />
+        <p>Advertisement</p>
+        <img className="rightbarAd" src={`${PF}ad.jpg`} alt="" />
         <h4 className="rightbarTitle">Users also viewed</h4>
         <ul className="rightbarFriendList">
           {dummyUsers.map((user) => (
