@@ -214,7 +214,7 @@ export default function Topbar() {
         {resultPosts && resultPosts.length > 0 && (
           resultPosts.map((post) => (
             <Link
-              to={post._id}
+              to={`/post/${post._id}`}
               style={{ textDecoration: "none", color: "black" }}
               key={post._id}
             >

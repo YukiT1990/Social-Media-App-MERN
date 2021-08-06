@@ -48,8 +48,8 @@ function App() {
         <Route path="/rightbar/:username">
           {user ? (width < WIDTH_THRESHOLD_MEDIUM ? <RightbarPage /> : <Profile />) : <Redirect to="/login" />}
         </Route>
-        <Route path="/:postid">
-          <TargetPost />
+        <Route path="/post/:postid">
+          {user ? <TargetPost /> : <Register />}
         </Route>
       </Switch>
     </Router>
