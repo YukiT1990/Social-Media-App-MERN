@@ -67,7 +67,18 @@ app.use("/api/posts", postRoute);
 //   res.send("welcome to user page");
 // })
 
+const PORT = process.env.PORT || 8800;
+
 // localhost:8800
-app.listen(8800, () => {
+app.listen(PORT, () => {
   console.log("backend server is running!")
 })
+
+if (process.env.NODE_ENV == "production") {
+
+  app.use(express.static(path.resolve(__dirname, "./client/build")));
+
+  app.get("*", function (request, response) {
+    response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+  });
+}
