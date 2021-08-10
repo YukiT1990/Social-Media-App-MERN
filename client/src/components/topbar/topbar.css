@@ -56,6 +56,8 @@
 .searchIcon {
   font-size: 20px !important;
   margin-left: 10px;
+  text-decoration: none;
+  color: white;
 }
 
 .searchInput {
@@ -82,6 +84,7 @@
 }
 
 .topbarLink {
+  text-decoration: none;
   display: block;
   margin-right: min(8px, 8/375 * 100vw);
   font-size: min(8px, 8/375 * 100vw);
@@ -124,6 +127,16 @@
 
 .searchresults {
   background-color: white;
+}
+
+.nonedecowhite {
+  text-decoration: none;
+  color: white;
+}
+
+.nonedecoblack {
+  text-decoration: none;
+  color: black;
 }
 
 /* wider than 600px */
@@ -222,9 +235,5 @@
 
   .topbarRight {
     flex: 4;
-  }
-
-  .sidebar {
-    /* visibility: hidden; */
   }
 }

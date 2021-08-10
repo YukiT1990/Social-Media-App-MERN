@@ -92,7 +92,10 @@ export default function Topbar() {
               <Close />
             )}
           </div>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link
+            className="topbarLink"
+            to="/"
+          >
             <span className="logo">Under The Water</span>
           </Link>
         </div>
@@ -109,7 +112,7 @@ export default function Topbar() {
             />
           </div>
           <div className="searchIconForSmallScreen">
-            <Search className="searchIcon" onClick={() => setSearching(!searching)} style={{ textDecoration: "none", color: "white" }} />
+            <Search className="searchIcon" onClick={() => setSearching(!searching)} />
 
           </div>
 
@@ -117,17 +120,17 @@ export default function Topbar() {
         <div className="topbarRight">
           <div className="topbarLinks">
 
-            <Link to="/" style={{ textDecoration: "none" }}>
+            <Link to="/" className="topbarLink">
               <span className="topbarLink">Homepage</span>
             </Link>
-            <Link to={`/profile/${user.username}`} style={{ textDecoration: "none" }}>
+            <Link to={`/profile/${user.username}`} className="topbarLink">
               <span className="topbarLink">Timeline</span>
             </Link>
             {user &&
               <span className="topbarLink" onClick={logoutHandler}>Logout</span>
             }
             {!user &&
-              <Link to="/login" style={{ textDecoration: "none" }}>
+              <Link to="/login" className="topbarLink">
                 <span className="topbarLink">Login</span>
               </Link>
             }
@@ -159,7 +162,7 @@ export default function Topbar() {
           </Link>
 
           <div className="smallscreen">
-            <Link to={`/rightbar/${user.username}`} style={{ textDecoration: "none", color: "white" }}>
+            <Link to={`/rightbar/${user.username}`} className="nonedecowhite">
               <MenuOpen />
             </Link>
           </div>
@@ -200,7 +203,7 @@ export default function Topbar() {
           resultUsers.map((user) => (
             <Link
               to={"/profile/" + user.username}
-              style={{ textDecoration: "none", color: "black" }}
+              className="nonedecoblack"
               key={user._id}
             >
               <p>{user.username}</p>
@@ -215,7 +218,7 @@ export default function Topbar() {
           resultPosts.map((post) => (
             <Link
               to={`/post/${post._id}`}
-              style={{ textDecoration: "none", color: "black" }}
+              className="nonedecoblack"
               key={post._id}
             >
               <p>

@@ -79,7 +79,7 @@ export default function Sidebar() {
             <Link
               key={user._id}
               to={"/profile/" + user.username}
-              style={{ textDecoration: "none", color: "black" }}
+              className="sidebarLinks"
             >
               <CloseFriend key={user.id} user={user} />
             </Link>

@@ -65,6 +65,10 @@
   font-weight: 500;
 }
 
+.inputforshare {
+  display: none;
+}
+
 .shareButton {
   border: none;
   padding: 7px;
@@ -92,6 +96,11 @@
   right: 20px;
   cursor: pointer;
   opacity: 0.7;
+}
+
+.sidebarLinks {
+  text-decoration: none;
+  color: black;
 }
 
 /* wider than 600px */

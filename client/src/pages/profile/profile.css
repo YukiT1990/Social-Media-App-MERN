@@ -169,6 +169,10 @@
   color: white;
 }
 
+.inputhide {
+  display: none;
+}
+
 /* wider than 800px */
 @media screen and (min-width: 800px) {
   .profile {

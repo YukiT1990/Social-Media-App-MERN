@@ -134,7 +134,7 @@ export default function Profile() {
                     <span className="coverImgEdit"><Edit htmlColor="Black" className="editImg" onClick={() => setEditingCoverImg(true)} /></span>
                   )}
                   <input
-                    style={{ display: "none" }}
+                    className="inputhide"
                     type="file"
                     id="coverImgFile"
                     accept=".png,.jpeg,.jpg"
@@ -174,7 +174,7 @@ export default function Profile() {
                   )}
 
                   <input
-                    style={{ display: "none" }}
+                    className="inputhide"
                     type="file"
                     id="userImgfile"
                     accept=".png,.jpeg,.jpg"
